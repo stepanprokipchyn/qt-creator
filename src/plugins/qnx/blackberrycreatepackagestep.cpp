@@ -505,41 +505,41 @@ bool BlackBerryCreatePackageStep::doUpdateAppDescriptorFile(const Utils::FileNam
             assetsUpdated = removeQtAssets(assetList);
         }
 
-        if (environmentUpdated) {
-            QMessageBox::StandardButton answer = QMessageBox::Yes;
-            if (!skipConfirmation) {
-                QString confirmationText = tr("In order to link to the correct Qt library specified in the deployment settings "
-                                              "Qt Creator needs to update the Qt environment variables "
-                                              "in the BAR application file as follows:\n\n"
-                                              "<env var=\"LD_LIBRARY_PATH\" value=\"%1\"/>\n"
-                                              "<env var=\"QT_PLUGIN_PATH\" value=\"%2\"/>\n"
-                                              "<env var=\"QML_IMPORT_PATH\" value=\"%3\"/>\n")
-                        .arg(env.value(QLatin1String("LD_LIBRARY_PATH")),
-                             env.value(QLatin1String("QT_PLUGIN_PATH")),
-                             env.value(QLatin1String("QML_IMPORT_PATH")));
+//        if (environmentUpdated) {
+//            QMessageBox::StandardButton answer = QMessageBox::Yes;
+//            if (!skipConfirmation) {
+//                QString confirmationText = tr("In order to link to the correct Qt library specified in the deployment settings "
+//                                              "Qt Creator needs to update the Qt environment variables "
+//                                              "in the BAR application file as follows:\n\n"
+//                                              "<env var=\"LD_LIBRARY_PATH\" value=\"%1\"/>\n"
+//                                              "<env var=\"QT_PLUGIN_PATH\" value=\"%2\"/>\n"
+//                                              "<env var=\"QML_IMPORT_PATH\" value=\"%3\"/>\n")
+//                        .arg(env.value(QLatin1String("LD_LIBRARY_PATH")),
+//                             env.value(QLatin1String("QT_PLUGIN_PATH")),
+//                             env.value(QLatin1String("QML_IMPORT_PATH")));
 
-                if (isQt5)
-                    confirmationText.append(QString::fromLatin1("<env var=\"QML2_IMPORT_PATH\" value=\"%1\"/>\n")
-                                            .arg(env.value(QLatin1String("QML2_IMPORT_PATH"))));
+//                if (isQt5)
+//                    confirmationText.append(QString::fromLatin1("<env var=\"QML2_IMPORT_PATH\" value=\"%1\"/>\n")
+//                                            .arg(env.value(QLatin1String("QML2_IMPORT_PATH"))));
 
-                confirmationText.append(tr("\nDo you want to update it?"));
-                answer = QMessageBox::question(Core::ICore::mainWindow(), tr("Confirmation"),
-                                               confirmationText,
-                                               QMessageBox::Yes | QMessageBox::No);
-            }
+//                confirmationText.append(tr("\nDo you want to update it?"));
+//                answer = QMessageBox::question(Core::ICore::mainWindow(), tr("Confirmation"),
+//                                               confirmationText,
+//                                               QMessageBox::Yes | QMessageBox::No);
+//            }
 
-            if (answer == QMessageBox::Yes) {
-                QVariant envVar;
-                envVar.setValue(Utils::EnvironmentItem::fromStringList(env.toStringList()));
-                doc.setValue(BarDescriptorDocument::env, envVar);
-                updated = true;
-            }
-        }
+//            if (answer == QMessageBox::Yes) {
+//                QVariant envVar;
+//                envVar.setValue(Utils::EnvironmentItem::fromStringList(env.toStringList()));
+//                doc.setValue(BarDescriptorDocument::env, envVar);
+//                updated = true;
+//            }
+//        }
 
-        if (assetsUpdated) {
-            doc.setValue(BarDescriptorDocument::asset, QVariant::fromValue(assetList));
-            updated = true;
-        }
+//        if (assetsUpdated) {
+//            doc.setValue(BarDescriptorDocument::asset, QVariant::fromValue(assetList));
+//            updated = true;
+//        }
     }
 
     // Skip unnecessary saving
